@@ -1,5 +1,5 @@
 name: mistdumper
-description: A simple command-line application.
+description: A configurable pattern finder for static analysis written in Dart
 version: 1.0.0
 homepage: https://github.com/Midi12/mistdumper
 repository: https://github.com/Midi12/mistdumper

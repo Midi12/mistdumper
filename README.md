@@ -1,6 +1,6 @@
 # mistdumper
 
-A static signature finder for PE executable
+A configurable pattern finder for static analysis written in Dart
 
 ## Usage
 `mistdumper.exe [options] <executablePath>`
