@@ -23,8 +23,9 @@ void main(List<String> arguments) {
     ..addOption('format', abbr: 'f', mandatory: true, help: 'The output format', valueHelp: 'format');
 
   if (arguments.isEmpty) {
+    message('mistdumper.exe [options] <executablePath>');
     message(parser.usage);
-    message('<executablePath>                     Path of the executable to parse');
+    message('executablePath                       Path of the executable to parse');
     return;
   }
 
