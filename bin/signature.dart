@@ -8,11 +8,9 @@ class Signature {
   final String name;
   final String pattern;
   final bool relative;
-  final bool rip_relative;
-  final int extra;
   final int offset;
 
-  Signature(this.name, this.pattern, this.relative, this.rip_relative, this.extra, this.offset);
+  Signature(this.name, this.pattern, this.relative, this.offset);
 
   factory Signature.fromJson(Map<String, dynamic> json) => _$SignatureFromJson(json);
 
