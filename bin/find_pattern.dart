@@ -23,11 +23,6 @@ class Pattern {
     var i = 0;
     for (var elem in elems) {
       _data[i++] = elem.contains('?') ? wildcard : int.parse(elem, radix: 16);
-      // if (elems.contains('?')) {
-      //   _data[i++] = wildcard;
-      // } else {
-      //   _data[i++] = int.parse(elem, radix: 16);
-      // }
     }
   }
 
@@ -46,11 +41,26 @@ FindPatternResult? findPattern(pefile.PeFileBase pe, Signature signature, { int 
 
     // find pattern implementation
     for (var i = 0; i < data.length; i++) {
+      // short circuit if first data byte is not equal to first pattern byte
       if (pattern.data[0] == wildcard || pattern.data[0] == data[i]) {
+        // pick a part of data corresponding to our pattern to compare to our pattern
         var sublist = data.sublist(i, i + pattern.length);
         if (sublist.asMap().every((index, value) =>  pattern.data[index] == wildcard || pattern.data[index] == value)) {
           // not using pe.fileOffsetToRva because we the buffer we are using is only containing the section bytes and not the whole file
-          result = FindPatternResult(signature.name, i + section.virtual_address + signature.offset);
+          var address = 0;
+          if (signature.relative) {
+            var offset = i + signature.offset;
+            if (offset + 4 > data.length) {
+              throw Exception('relative addressing out of bounds');
+            }
+
+            var rel = data.buffer.asByteData().getUint32(offset, Endian.little);
+            address = offset + 4 + rel + section.virtual_address;
+          } else {
+            address = i + section.virtual_address + signature.offset;
+          }
+  
+          result = FindPatternResult(signature.name, address);
           break;
         }
       }
