@@ -52,7 +52,10 @@ void main(List<String> arguments) {
   for (var signature in config.signatures) {
     var result = findPattern(pe, signature);
     if (result != null) {
+      message('FOUND ${result.name} => ${result.offset.toRadixString(16)}h');
       results.add(result);
+    } else {
+      warning('FAILED to find ${signature.name} !');
     }
   }
 

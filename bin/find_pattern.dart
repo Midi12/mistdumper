@@ -30,8 +30,8 @@ class Pattern {
   int get length => _data.length;
 }
 
-FindPatternResult? findPattern(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE }) {
-  FindPatternResult? result;
+List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE }) {
+  var results = <FindPatternResult>[];
 
   var pattern = Pattern(signature.pattern);
 
@@ -60,23 +60,19 @@ FindPatternResult? findPattern(pefile.PeFileBase pe, Signature signature, { int 
             address = i + section.virtual_address + signature.offset;
           }
   
-          result = FindPatternResult(signature.name, address);
-          break;
+          results.add(FindPatternResult(signature.name, address));
+          i += pattern.length;
         }
       }
     }
-
-    if (result != null) {
-      message('FOUND ${result.name} => ${result.offset.toRadixString(16)}h');
-      break;
-    }
   }
 
-  if (result == null) {
-    warning('FAILED to find ${signature.name} !');
-  }
+  return results;
+}
 
-  return result;
+FindPatternResult? findPattern(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE }) {
+  List<FindPatternResult?> results = findPatterns(pe, signature, sectionCharacteristics: sectionCharacteristics);
+  return results.isNotEmpty ? results.first : null;
 }
 
 extension Every<K, V> on Map<K, V> {
