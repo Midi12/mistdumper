@@ -2,6 +2,8 @@
 
 A configurable pattern finder for static analysis written in Dart
 
+This project has been inspired by [hazedumper](https://github.com/frk1/hazedumper-rs) which is a runtime signature finder.
+
 ## Usage
 `mistdumper.exe [options] <executablePath>`
 
