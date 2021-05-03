@@ -46,6 +46,9 @@ using System;
 
 namespace Signatures
 {
-	public static readonly UIntPtr dwGameOffset1 = 0x4174;
+	public static class Signatures
+	{
+		public static readonly int dwGameOffset1 = 0x4174;
+	}
 }
 ```

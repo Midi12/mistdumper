@@ -11,13 +11,13 @@ class CsharpFormatter extends Formatter {
   String get commentSymbol => '//';
 
   @override
-  String get header => 'using System;\n\nnamespace Signatures\n{';
+  String get header => 'using System;\n\nnamespace Signatures\n{\n\tpublic static class Signatures\n\t{';
 
   @override
-  String get footer => '}';
+  String get footer => '\t}\n}';
 
   @override
   String addLine(String name, int offset) {
-    return 'public static readonly UIntPtr $name = 0x${offset.toRadixString(16)};';
+    return '\tpublic static readonly UIntPtr $name = 0x${offset.toRadixString(16)};';
   }
 }
