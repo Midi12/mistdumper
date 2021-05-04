@@ -7,11 +7,11 @@ class Signature {
 
   final String name;
   final String pattern;
-  final bool relative;
-  final int offset;
+  @JsonKey(defaultValue: false) final bool relative;
+  @JsonKey(defaultValue: 0) final int offset;
   final String namespace;
-  final bool dereference;
-  final int dereference_size;
+  @JsonKey(defaultValue: false) final bool dereference;
+  @JsonKey(defaultValue: 0) final int dereference_size;
 
   Signature(this.name, this.pattern, this.relative, this.offset, this.namespace, this.dereference, this.dereference_size);
 

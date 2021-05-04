@@ -10,11 +10,11 @@ Signature _$SignatureFromJson(Map<String, dynamic> json) {
   return Signature(
     json['name'] as String,
     json['pattern'] as String,
-    json['relative'] as bool,
-    json['offset'] as int,
+    json['relative'] as bool? ?? false,
+    json['offset'] as int? ?? 0,
     json['namespace'] as String,
-    json['dereference'] as bool,
-    json['dereference_size'] as int,
+    json['dereference'] as bool? ?? false,
+    json['dereference_size'] as int? ?? 0,
   );
 }
 

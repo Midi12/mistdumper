@@ -23,6 +23,37 @@ Currently implemented output formats are :
 * C++
 * CSharp
 
+## JSON configuration
+
+Full structure :
+```json
+{
+  "name": "ExampleGame Signature List",
+  "game_name": "ExampleGame",
+  "version": "0.0.0.1",
+  "author": "Midi12",
+  "signatures" : [
+    {
+      "name": "s_globalPtr",
+      "relative": true,
+      "dereference": false,
+      "dereference_size": 0,
+      "offset": 3,
+      "pattern": "DE AD BE ?? ?? ?? ?? EF DE AD C0 DE ?? ?? ?? ??",
+      "namespace": "Statics"
+    }
+  ]
+}
+```
+
+* name : mandatory
+* pattern : mandatory
+* namespace : mandatory
+* dereference : optional (default value : `false`)
+* dereference_size : optional (default value : `0`)
+* relative : optional (default value : `false`)
+* offset : optional (default value : `0`)
+
 ## Example outputs
 
 Dart :
