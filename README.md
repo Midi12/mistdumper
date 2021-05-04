@@ -54,13 +54,56 @@ Full structure :
 * relative : optional (default value : `false`)
 * offset : optional (default value : `0`)
 
+Full example of JSON configuration:
+```json
+{
+  "name": "ExampleGame Signature List",
+  "game_name": "ExampleGame",
+  "version": "0.0.0.1",
+  "author": "Midi12",
+  "signatures" : [
+    {
+      "name": "s_globalPtr",
+      "relative": true,
+      "offset": 3,
+      "pattern": "DE AD BE ?? ?? ?? ?? EF DE AD C0 DE ?? ?? ?? ??",
+      "namespace": "Statics"
+    },
+    {
+      "name": "s_globalPtr__pOffset",
+      "dereference": true,
+      "dereference_size": 4,
+      "offset": 8,
+      "pattern": "DE AD BE ?? ?? ?? ?? EF DE AD C0 DE ?? ?? ?? ??",
+      "namespace": "Offsets"
+    },
+    {
+      "name": "ExampleFunction",
+      "pattern": "DE AD BE ?? ?? ?? ?? EF DE AD C0 DE ?? ?? ?? ??",
+      "namespace": "Functions"
+    }
+  ]
+}
+```
+
 ## Example outputs
 
 Dart :
 ```dart
-class Signatures {
-	static const int dwGameOffset1 = 0x4174;
+library mistdumper;
+
+
+	class Functions {
+		static const int ExampleFunction = 0xdeadc0de;
+	}
+	class Offsets {
+		static const int s_globalPtr__pOffset = 0xc0ffee;
+	}
+	class Statics {
+		static const int s_globalPtr = 0xdeadbeef;
+	}
 }
+
 ```
 
 C++ :
@@ -68,8 +111,18 @@ C++ :
 #pragma once
 #include <cstdint>
 
-namespace Signatures {
-	constexpr ::std::ptrdiff_t dwGameOffset1 = 0x4174;
+namespace mistdumper {
+
+	namespace Functions {
+			constexpr ptrdiff_t ExampleFunction = 0xdeadc0de;
+	}
+	namespace Offsets {
+			constexpr ptrdiff_t s_globalPtr__pOffset = 0xc0ffee;
+	}
+	namespace Statics {
+			constexpr ptrdiff_t s_globalPtr = 0xdeadbeef;
+	}
+
 }
 ```
 
@@ -77,11 +130,18 @@ CSharp :
 ```csharp
 using System;
 
-namespace Signatures
+namespace MistDumper
 {
-	public static class Signatures
-	{
-		public static readonly int dwGameOffset1 = 0x4174;
+
+	public static class Functions {
+			public static readonly UIntPtr ExampleFunction = 0xdeadc0de;
 	}
+	public static class Offsets {
+			public static readonly UIntPtr s_globalPtr__pOffset = 0xc0ffee;
+	}
+	public static class Statics {
+			public static readonly UIntPtr s_globalPtr = 0xdeadbeef;
+	}
+
 }
 ```
