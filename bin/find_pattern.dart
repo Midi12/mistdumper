@@ -63,7 +63,7 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature,
               throw Exception('relative addressing out of bounds');
             }
 
-            var rel = data.buffer.asByteData().getUint32(offset, Endian.little);
+            var rel = data.buffer.asByteData().getInt32(offset, Endian.little);
             address = offset + 4 + rel + section.virtual_address;
           } else {
             address = i + signature.offset;
