@@ -57,9 +57,29 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
             var rel = data.buffer.asByteData().getUint32(offset, Endian.little);
             address = offset + 4 + rel + section.virtual_address;
           } else {
-            address = i + section.virtual_address + signature.offset;
+            address = i + signature.offset;
+            if (signature.dereference) {
+              switch (signature.dereference_size) {
+                case 1:
+                  address = data.buffer.asByteData().getUint8(address);
+                  break;
+                case 2:
+                  address = data.buffer.asByteData().getUint16(address, Endian.little);
+                  break;
+                case 4:
+                  address = data.buffer.asByteData().getUint32(address, Endian.little);
+                  break;
+                case 8:
+                  address = data.buffer.asByteData().getUint64(address, Endian.little);
+                  break;
+                default:
+                  throw Exception('Invalid dereference size');
+              }
+            } else {
+              address += section.virtual_address;
+            }
           }
-  
+
           results.add(FindPatternResult(signature.name, address, signature.namespace));
           if (breakOnFirst) break;
           i += pattern.length;
