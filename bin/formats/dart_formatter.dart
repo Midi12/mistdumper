@@ -11,10 +11,13 @@ class DartFormatter extends Formatter {
   String get commentSymbol => '//';
 
   @override
-  String get header => 'library mistdumper;\n\nclass Signatures {';
+  String get header => 'library mistdumper;\n\n';
 
   @override
   String get footer => '}';
+
+  @override
+  String get namespace_keyword => 'class';
 
   @override
   String addLine(String name, int offset) {

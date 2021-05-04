@@ -11,10 +11,13 @@ class CppFormatter extends Formatter {
   String get commentSymbol => '//';
 
   @override
-  String get header => '#pragma once\n#include <cstdint>\n\nnamespace mistdumper {\n\tnamespace Signatures {';
+  String get header => '#pragma once\n#include <cstdint>\n\nnamespace mistdumper {\n';
 
   @override
-  String get footer => '\t}\n}';
+  String get footer => '\n}';
+
+  @override
+  String get namespace_keyword => 'namespace';
 
   @override
   String addLine(String name, int offset) {

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
+
 import '../find_pattern.dart';
 import 'cpp_formatter.dart';
 import 'csharp_formatter.dart';
@@ -14,6 +16,7 @@ abstract class Formatter {
   String get commentSymbol;
   String get header;
   String get footer;
+  String get namespace_keyword;
 
   late String version;
   late String author;
@@ -38,8 +41,15 @@ abstract class Formatter {
 
     _writeLine(output, '$header\n');
 
-    for (var result in results) {
-      _writeLine(output, '\t${addLine(result.name, result.offset)}\n');
+    results.sort((a, b) => a.namespace.compareTo(b.namespace));
+    var grouped_results = groupBy(results, (key) => (key as FindPatternResult).namespace);
+
+    for (var results in grouped_results.entries) {
+      _writeLine(output, '\t$namespace_keyword ${results.key} {\n');
+      for (var result in results.value) {
+        _writeLine(output, '\t\t${addLine(result.name, result.offset)}\n');
+      }
+      _writeLine(output, '\t}\n');
     }
 
     _writeLine(output, '$footer\n');

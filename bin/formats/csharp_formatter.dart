@@ -11,10 +11,13 @@ class CsharpFormatter extends Formatter {
   String get commentSymbol => '//';
 
   @override
-  String get header => 'using System;\n\nnamespace MistDumper\n{\n\tpublic static class Signatures\n\t{';
+  String get header => 'using System;\n\nnamespace MistDumper\n{\n';
 
   @override
-  String get footer => '\t}\n}';
+  String get footer => '\n}';
+
+  @override
+  String get namespace_keyword => 'public static class';
 
   @override
   String addLine(String name, int offset) {

@@ -3,13 +3,13 @@ import 'dart:typed_data';
 import 'package:pefile/pefile.dart' as pefile;
 
 import 'signature.dart';
-import 'simple_console.dart';
 
 class FindPatternResult {
   final String name;
   final int offset;
+  final String namespace;
 
-  FindPatternResult(this.name, this.offset);
+  FindPatternResult(this.name, this.offset, this.namespace);
 }
 
 const int wildcard = 0xCC;
@@ -60,7 +60,7 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
             address = i + section.virtual_address + signature.offset;
           }
   
-          results.add(FindPatternResult(signature.name, address));
+          results.add(FindPatternResult(signature.name, address, signature.namespace));
           if (breakOnFirst) break;
           i += pattern.length;
         }

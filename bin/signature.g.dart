@@ -12,6 +12,7 @@ Signature _$SignatureFromJson(Map<String, dynamic> json) {
     json['pattern'] as String,
     json['relative'] as bool,
     json['offset'] as int,
+    json['namespace'] as String,
   );
 }
 
@@ -20,4 +21,5 @@ Map<String, dynamic> _$SignatureToJson(Signature instance) => <String, dynamic>{
       'pattern': instance.pattern,
       'relative': instance.relative,
       'offset': instance.offset,
+      'namespace': instance.namespace,
     };
