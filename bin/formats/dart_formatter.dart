@@ -14,7 +14,7 @@ class DartFormatter extends Formatter {
   String get header => 'library mistdumper;\n\n';
 
   @override
-  String get footer => '}';
+  String get footer => '';
 
   @override
   String get namespace_keyword => 'class';
