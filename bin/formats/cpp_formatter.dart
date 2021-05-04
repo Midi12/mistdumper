@@ -11,13 +11,13 @@ class CppFormatter extends Formatter {
   String get commentSymbol => '//';
 
   @override
-  String get header => '#pragma once\n#include <cstdint>\n\nnamespace Signatures {';
+  String get header => '#pragma once\n#include <cstdint>\n\nnamespace mistdumper {\n\tnamespace Signatures {';
 
   @override
-  String get footer => '}';
+  String get footer => '\t}\n}';
 
   @override
   String addLine(String name, int offset) {
-    return 'constexpr ::std::ptrdiff_t $name = 0x${offset.toRadixString(16)};';
+    return '\tconstexpr ptrdiff_t $name = 0x${offset.toRadixString(16)};';
   }
 }

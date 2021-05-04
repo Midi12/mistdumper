@@ -11,7 +11,7 @@ class CsharpFormatter extends Formatter {
   String get commentSymbol => '//';
 
   @override
-  String get header => 'using System;\n\nnamespace Signatures\n{\n\tpublic static class Signatures\n\t{';
+  String get header => 'using System;\n\nnamespace MistDumper\n{\n\tpublic static class Signatures\n\t{';
 
   @override
   String get footer => '\t}\n}';
