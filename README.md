@@ -1,6 +1,8 @@
 # mistdumper
 
-A configurable pattern finder for static analysis written in Dart
+A configurable pattern finder for static analysis written in Dart.
+
+It is meant to retrieve offsets from file on disk without running them.
 
 This project has been inspired by [hazedumper](https://github.com/frk1/hazedumper-rs) which is a runtime signature finder.
 
@@ -11,6 +13,7 @@ options :
 ```
 -c, --config=<path> (mandatory)      Path of the config file
 -f, --format=<format> (mandatory)    The output format
+    --[no-]versioned                 Should the version be appended to file name
 executablePath                       Path of the executable to parse
 ```
 
@@ -28,8 +31,8 @@ Currently implemented output formats are :
 Full structure :
 ```json
 {
-  "name": "ExampleGame Signature List",
-  "game_name": "ExampleGame",
+  "name": "ExampleApp Signature List",
+  "appname": "ExampleApp",
   "version": "0.0.0.1",
   "author": "Midi12",
   "signatures" : [
@@ -50,15 +53,15 @@ Full structure :
 * pattern : mandatory
 * namespace : mandatory
 * dereference : optional (default value : `false`)
-* dereference_size : optional (default value : `0`)
+* dereference_size : optional (default value : `4`)
 * relative : optional (default value : `false`)
 * offset : optional (default value : `0`)
 
 Full example of JSON configuration:
 ```json
 {
-  "name": "ExampleGame Signature List",
-  "game_name": "ExampleGame",
+  "name": "ExampleApp Signature List",
+  "appname": "ExampleApp",
   "version": "0.0.0.1",
   "author": "Midi12",
   "signatures" : [

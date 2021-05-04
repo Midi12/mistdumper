@@ -28,7 +28,9 @@ void main(List<String> arguments) {
         abbr: 'f',
         mandatory: true,
         help: 'The output format',
-        valueHelp: 'format');
+        valueHelp: 'format')
+    ..addFlag('versioned',
+        defaultsTo: false, help: 'Should the version be appended to file name');
 
   if (arguments.isEmpty) {
     message('mistdumper.exe [options] <executablePath>');
@@ -66,7 +68,13 @@ void main(List<String> arguments) {
 
   var fmter = getFormatterByName(args['format']);
 
-  var filename = fmter.dump(config.author, config.version, config.appname, results);
+  var filename = config.appname;
+  if (args['versioned'] as bool) {
+    filename += '_${config.version}';
+  }
+
+  filename = fmter.dump(
+      config.author, config.version, config.appname, filename, results);
   info('File generated successfully => $filename');
 
   pe.dispose();

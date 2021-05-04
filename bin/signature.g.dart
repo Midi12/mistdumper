@@ -14,7 +14,7 @@ Signature _$SignatureFromJson(Map<String, dynamic> json) {
     json['offset'] as int? ?? 0,
     json['namespace'] as String,
     json['dereference'] as bool? ?? false,
-    json['dereference_size'] as int? ?? 0,
+    json['dereference_size'] as int? ?? 4,
   );
 }
 

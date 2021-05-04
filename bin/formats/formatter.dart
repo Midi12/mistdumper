@@ -24,8 +24,9 @@ abstract class Formatter {
     file.writeAsStringSync(str, mode: FileMode.append);
   }
 
-  String dump(String version, String author, String appname, List<FindPatternResult> results) {
-    var filename = '${appname.replaceAll(' ', '').trim().toLowerCase()}.$ext';
+  String dump(String version, String author, String appname, String filename,
+      List<FindPatternResult> results) {
+    filename = '${filename.replaceAll(' ', '').trim().toLowerCase()}.$ext';
     if (File(filename).existsSync()) {
       File(filename).deleteSync();
     }

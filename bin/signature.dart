@@ -13,7 +13,7 @@ class Signature {
   final String namespace;
   @JsonKey(defaultValue: false)
   final bool dereference;
-  @JsonKey(defaultValue: 0)
+  @JsonKey(defaultValue: 4)
   final int dereference_size;
 
   Signature(this.name, this.pattern, this.relative, this.offset, this.namespace,
