@@ -66,11 +66,7 @@ void main(List<String> arguments) {
 
   var fmter = getFormatterByName(args['format']);
 
-  fmter.author = config.author;
-  fmter.version = config.version;
-  fmter.gamename = config.game_name;
-
-  var filename = fmter.dump(results);
+  var filename = fmter.dump(config.author, config.version, config.appname, results);
   info('File generated successfully => $filename');
 
   pe.dispose();

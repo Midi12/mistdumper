@@ -9,7 +9,7 @@ part of 'config.dart';
 Config _$ConfigFromJson(Map<String, dynamic> json) {
   return Config(
     json['name'] as String,
-    json['game_name'] as String,
+    json['appname'] as String,
     json['version'] as String,
     json['author'] as String,
     (json['signatures'] as List<dynamic>)
@@ -20,7 +20,7 @@ Config _$ConfigFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$ConfigToJson(Config instance) => <String, dynamic>{
       'name': instance.name,
-      'game_name': instance.game_name,
+      'appname': instance.appname,
       'version': instance.version,
       'author': instance.author,
       'signatures': instance.signatures,

@@ -18,25 +18,21 @@ abstract class Formatter {
   String get footer;
   String get namespace_keyword;
 
-  late String version;
-  late String author;
-  late String gamename;
-
   String addLine(String name, int offset);
 
   void _writeLine(File file, String str) {
     file.writeAsStringSync(str, mode: FileMode.append);
   }
 
-  String dump(List<FindPatternResult> results) {
-    var filename = '${gamename.replaceAll(' ', '').trim().toLowerCase()}.$ext';
+  String dump(String version, String author, String appname, List<FindPatternResult> results) {
+    var filename = '${appname.replaceAll(' ', '').trim().toLowerCase()}.$ext';
     if (File(filename).existsSync()) {
       File(filename).deleteSync();
     }
 
     var output = File(filename);
     _writeLine(
-        output, '$commentSymbol Offsets for $gamename ($version) by $author\n');
+        output, '$commentSymbol Offsets for $appname ($version) by $author\n');
     _writeLine(output, '$commentSymbol Generated with mistdumper\n');
     _writeLine(output, '$commentSymbol Timestamp : $timestamp\n\n');
 
