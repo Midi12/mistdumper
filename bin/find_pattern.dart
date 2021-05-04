@@ -30,7 +30,7 @@ class Pattern {
   int get length => _data.length;
 }
 
-List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE }) {
+List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE, bool breakOnFirst = false }) {
   var results = <FindPatternResult>[];
 
   var pattern = Pattern(signature.pattern);
@@ -61,6 +61,7 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
           }
   
           results.add(FindPatternResult(signature.name, address));
+          if (breakOnFirst) break;
           i += pattern.length;
         }
       }
@@ -71,7 +72,7 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
 }
 
 FindPatternResult? findPattern(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE }) {
-  List<FindPatternResult?> results = findPatterns(pe, signature, sectionCharacteristics: sectionCharacteristics);
+  List<FindPatternResult?> results = findPatterns(pe, signature, sectionCharacteristics: sectionCharacteristics, breakOnFirst: true);
   return results.isNotEmpty ? results.first : null;
 }
 
