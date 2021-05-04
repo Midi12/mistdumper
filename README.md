@@ -102,7 +102,6 @@ library mistdumper;
 	class Statics {
 		static const int s_globalPtr = 0xdeadbeef;
 	}
-}
 
 ```
 
