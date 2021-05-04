@@ -67,4 +67,6 @@ void main(List<String> arguments) {
 
   var filename = fmter.dump(results);
   info('File generated successfully => $filename');
+
+  pe.dispose();
 }
