@@ -13,6 +13,7 @@ class FindPatternResult {
 }
 
 const int wildcard = 0xCC;
+
 class Pattern {
   late Uint8List _data;
 
@@ -30,12 +31,19 @@ class Pattern {
   int get length => _data.length;
 }
 
-List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE, bool breakOnFirst = false }) {
+List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature,
+    {int sectionCharacteristics =
+        pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE,
+    bool breakOnFirst = false}) {
   var results = <FindPatternResult>[];
 
   var pattern = Pattern(signature.pattern);
 
-  var sections = pe.sections.where((section) => (section.characteristics & sectionCharacteristics) == sectionCharacteristics).toList();
+  var sections = pe.sections
+      .where((section) =>
+          (section.characteristics & sectionCharacteristics) ==
+          sectionCharacteristics)
+      .toList();
   for (var section in sections) {
     var data = pe.getSectionData(section);
 
@@ -45,7 +53,8 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
       if (pattern.data[0] == wildcard || pattern.data[0] == data[i]) {
         // pick a part of data corresponding to our pattern to compare to our pattern
         var sublist = data.sublist(i, i + pattern.length);
-        if (sublist.asMap().every((index, value) =>  pattern.data[index] == wildcard || pattern.data[index] == value)) {
+        if (sublist.asMap().every((index, value) =>
+            pattern.data[index] == wildcard || pattern.data[index] == value)) {
           // not using pe.fileOffsetToRva because we the buffer we are using is only containing the section bytes and not the whole file
           var address = 0;
           if (signature.relative) {
@@ -64,13 +73,19 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
                   address = data.buffer.asByteData().getUint8(address);
                   break;
                 case 2:
-                  address = data.buffer.asByteData().getUint16(address, Endian.little);
+                  address = data.buffer
+                      .asByteData()
+                      .getUint16(address, Endian.little);
                   break;
                 case 4:
-                  address = data.buffer.asByteData().getUint32(address, Endian.little);
+                  address = data.buffer
+                      .asByteData()
+                      .getUint32(address, Endian.little);
                   break;
                 case 8:
-                  address = data.buffer.asByteData().getUint64(address, Endian.little);
+                  address = data.buffer
+                      .asByteData()
+                      .getUint64(address, Endian.little);
                   break;
                 default:
                   throw Exception('Invalid dereference size');
@@ -80,7 +95,8 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
             }
           }
 
-          results.add(FindPatternResult(signature.name, address, signature.namespace));
+          results.add(
+              FindPatternResult(signature.name, address, signature.namespace));
           if (breakOnFirst) break;
           i += pattern.length;
         }
@@ -91,8 +107,11 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature, 
   return results;
 }
 
-FindPatternResult? findPattern(pefile.PeFileBase pe, Signature signature, { int sectionCharacteristics = pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE }) {
-  List<FindPatternResult?> results = findPatterns(pe, signature, sectionCharacteristics: sectionCharacteristics, breakOnFirst: true);
+FindPatternResult? findPattern(pefile.PeFileBase pe, Signature signature,
+    {int sectionCharacteristics =
+        pefile.IMAGE_SCN_CNT_CODE | pefile.IMAGE_SCN_MEM_EXECUTE}) {
+  List<FindPatternResult?> results = findPatterns(pe, signature,
+      sectionCharacteristics: sectionCharacteristics, breakOnFirst: true);
   return results.isNotEmpty ? results.first : null;
 }
 

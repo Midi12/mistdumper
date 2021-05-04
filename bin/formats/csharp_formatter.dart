@@ -1,7 +1,6 @@
 import 'formatter.dart';
 
 class CsharpFormatter extends Formatter {
-
   CsharpFormatter() : super();
 
   @override

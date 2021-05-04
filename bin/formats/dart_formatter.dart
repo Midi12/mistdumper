@@ -1,7 +1,6 @@
 import 'formatter.dart';
 
 class DartFormatter extends Formatter {
-
   DartFormatter() : super();
 
   @override

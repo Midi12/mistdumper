@@ -35,14 +35,16 @@ abstract class Formatter {
     }
 
     var output = File(filename);
-    _writeLine(output, '$commentSymbol Offsets for $gamename ($version) by $author\n');
+    _writeLine(
+        output, '$commentSymbol Offsets for $gamename ($version) by $author\n');
     _writeLine(output, '$commentSymbol Generated with mistdumper\n');
     _writeLine(output, '$commentSymbol Timestamp : $timestamp\n\n');
 
     _writeLine(output, '$header\n');
 
     results.sort((a, b) => a.namespace.compareTo(b.namespace));
-    var grouped_results = groupBy(results, (key) => (key as FindPatternResult).namespace);
+    var grouped_results =
+        groupBy(results, (key) => (key as FindPatternResult).namespace);
 
     for (var results in grouped_results.entries) {
       _writeLine(output, '\t$namespace_keyword ${results.key} {\n');
@@ -58,23 +60,23 @@ abstract class Formatter {
 }
 
 Formatter getFormatterByName(String name) {
-    Formatter fmter;
+  Formatter fmter;
 
-    switch (name) {
-      case 'dart':
-        fmter = DartFormatter();
-        break;
-      case 'cpp':
-      case 'cplusplus':
-        fmter = CppFormatter();
-        break;
-      case 'cs':
-      case 'csharp':
-        fmter = CsharpFormatter();
-        break;
-      default:
-        throw Exception('Unknown formatter $name');
-    }
-
-    return fmter;
+  switch (name) {
+    case 'dart':
+      fmter = DartFormatter();
+      break;
+    case 'cpp':
+    case 'cplusplus':
+      fmter = CppFormatter();
+      break;
+    case 'cs':
+    case 'csharp':
+      fmter = CsharpFormatter();
+      break;
+    default:
+      throw Exception('Unknown formatter $name');
   }
+
+  return fmter;
+}

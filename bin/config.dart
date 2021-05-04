@@ -6,7 +6,6 @@ part 'config.g.dart';
 
 @JsonSerializable()
 class Config {
-
   final String name;
   final String game_name;
   final String version;

@@ -1,7 +1,6 @@
 import 'formatter.dart';
 
 class CppFormatter extends Formatter {
-
   CppFormatter() : super();
 
   @override
@@ -11,7 +10,8 @@ class CppFormatter extends Formatter {
   String get commentSymbol => '//';
 
   @override
-  String get header => '#pragma once\n#include <cstdint>\n\nnamespace mistdumper {\n';
+  String get header =>
+      '#pragma once\n#include <cstdint>\n\nnamespace mistdumper {\n';
 
   @override
   String get footer => '\n}';

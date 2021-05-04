@@ -19,13 +19,22 @@ void main(List<String> arguments) {
   banner();
 
   final parser = ArgParser()
-    ..addOption('config', abbr: 'c', mandatory: true, help: 'Path of the config file', valueHelp: 'path')
-    ..addOption('format', abbr: 'f', mandatory: true, help: 'The output format', valueHelp: 'format');
+    ..addOption('config',
+        abbr: 'c',
+        mandatory: true,
+        help: 'Path of the config file',
+        valueHelp: 'path')
+    ..addOption('format',
+        abbr: 'f',
+        mandatory: true,
+        help: 'The output format',
+        valueHelp: 'format');
 
   if (arguments.isEmpty) {
     message('mistdumper.exe [options] <executablePath>');
     message(parser.usage);
-    message('executablePath                       Path of the executable to parse');
+    message(
+        'executablePath                       Path of the executable to parse');
     return;
   }
 
@@ -40,11 +49,7 @@ void main(List<String> arguments) {
 
   var configPath = args['config'];
   var configFile = File(configPath);
-  var config = Config.fromJson(
-    jsonDecode(
-      configFile.readAsStringSync()
-    )
-  );
+  var config = Config.fromJson(jsonDecode(configFile.readAsStringSync()));
 
   var pe = pefile.parse(executablePath);
 
