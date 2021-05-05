@@ -54,6 +54,7 @@ void main(List<String> arguments) {
   var config = Config.fromJson(jsonDecode(configFile.readAsStringSync()));
 
   var pe = pefile.parse(executablePath);
+  message('Parsing $executablePath as ${pe.runtimeType.toString()}\n');
 
   var results = <FindPatternResult>[];
   for (var signature in config.signatures) {

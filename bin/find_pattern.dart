@@ -64,7 +64,12 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature,
             }
 
             var rel = data.buffer.asByteData().getInt32(offset, Endian.little);
-            address = offset + 4 + rel + section.virtual_address;
+
+            if (pe.is64bit) {
+              address = offset + 4 + rel + section.virtual_address;
+            } else {
+              address = rel - pe.header_data.image_base;
+            }
           } else {
             address = i + signature.offset;
             if (signature.dereference) {
