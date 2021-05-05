@@ -15,9 +15,11 @@ class Signature {
   final bool dereference;
   @JsonKey(defaultValue: 4)
   final int dereference_size;
+  @JsonKey(defaultValue: 0)
+  final int extra;
 
   Signature(this.name, this.pattern, this.relative, this.offset, this.namespace,
-      this.dereference, this.dereference_size);
+      this.dereference, this.dereference_size, this.extra);
 
   factory Signature.fromJson(Map<String, dynamic> json) =>
       _$SignatureFromJson(json);

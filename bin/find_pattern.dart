@@ -100,6 +100,8 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature,
             }
           }
 
+          address += signature.extra;
+
           results.add(
               FindPatternResult(signature.name, address, signature.namespace));
           if (breakOnFirst) break;

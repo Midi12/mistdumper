@@ -42,6 +42,7 @@ Full structure :
       "dereference": false,
       "dereference_size": 0,
       "offset": 3,
+      "extra": 12,
       "pattern": "DE AD BE ?? ?? ?? ?? EF DE AD C0 DE ?? ?? ?? ??",
       "namespace": "Statics"
     }
@@ -56,6 +57,7 @@ Full structure :
 * dereference_size : optional (default value : `4`)
 * relative : optional (default value : `false`)
 * offset : optional (default value : `0`)
+* extra : optional (default value : `0`)
 
 Full example of JSON configuration:
 ```json
@@ -82,6 +84,7 @@ Full example of JSON configuration:
     },
     {
       "name": "ExampleFunction",
+      "extra": 12,
       "pattern": "DE AD BE ?? ?? ?? ?? EF DE AD C0 DE ?? ?? ?? ??",
       "namespace": "Functions"
     }

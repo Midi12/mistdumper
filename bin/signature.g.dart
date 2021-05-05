@@ -15,6 +15,7 @@ Signature _$SignatureFromJson(Map<String, dynamic> json) {
     json['namespace'] as String,
     json['dereference'] as bool? ?? false,
     json['dereference_size'] as int? ?? 4,
+    json['extra'] as int? ?? 0,
   );
 }
 
@@ -26,4 +27,5 @@ Map<String, dynamic> _$SignatureToJson(Signature instance) => <String, dynamic>{
       'namespace': instance.namespace,
       'dereference': instance.dereference,
       'dereference_size': instance.dereference_size,
+      'extra': instance.extra,
     };

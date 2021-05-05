@@ -26,7 +26,7 @@ abstract class Formatter {
 
   String dump(String version, String author, String appname, String filename,
       List<FindPatternResult> results) {
-    filename = '${filename.replaceAll(' ', '').trim().toLowerCase()}.$ext';
+    filename = '${filename.replaceAll(RegExp(r'[^a-zA-Z0-9_\-]'), '_').trim().toLowerCase()}.$ext';
     if (File(filename).existsSync()) {
       File(filename).deleteSync();
     }
