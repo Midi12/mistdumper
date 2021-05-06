@@ -150,3 +150,11 @@ namespace MistDumper
 
 }
 ```
+
+## Building from the source
+
+You need Dart SDK `2.12.0` at least (https://dart.dev/get-dart).
+
+In case you modified the JSON class you need to run `dart run build_runner build`.
+
+Run `dart compile exe .\bin\mistdumper.dart -o .\build\mistdumper.exe`.
