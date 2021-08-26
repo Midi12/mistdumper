@@ -41,8 +41,7 @@ List<FindPatternResult> findPatterns(pefile.PeFileBase pe, Signature signature,
 
   var sections = pe.sections
       .where((section) =>
-          (section.characteristics & sectionCharacteristics) ==
-          sectionCharacteristics)
+          (section.characteristics & sectionCharacteristics) != 0)
       .toList();
   for (var section in sections) {
     var data = pe.getSectionData(section);
