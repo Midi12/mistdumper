@@ -1,3 +1,7 @@
+## 1.0.2
+
+- Fixed PE sections selection
+
 ## 1.0.1
 
 - Added `extra` option in signature
@@ -5,4 +9,4 @@
 
 ## 1.0.0
 
-- Initial version, created by Stagehand
+- Initial version

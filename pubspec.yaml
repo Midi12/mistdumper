@@ -1,6 +1,6 @@
 name: mistdumper
 description: A configurable pattern finder for static analysis written in Dart
-version: 1.0.0
+version: 1.0.2
 homepage: https://github.com/Midi12/mistdumper
 repository: https://github.com/Midi12/mistdumper
 
